@@ -1,8 +1,7 @@
 language: python
 
 python:
-    - 2.7
-    - 3.6
+    - 3.7
 
 # Setting sudo to false opts in to Travis-CI container-based builds.
 sudo: false
@@ -47,13 +46,7 @@ matrix:
         - python: 3.5
           env: PIP_DEPENDENCIES='git+https://git@github.com/nanograv/pint.git jplephem emcee statsmodels corner pytest-catchlog' SETUP_CMD='test --remote-data --coverage'
 
-        - python: 2.7
-          env: PIP_DEPENDENCIES='git+https://git@github.com/nanograv/pint.git jplephem emcee statsmodels corner pytest-catchlog' SETUP_CMD='test --remote-data'
-
         #Try without importing h5py but importing numba
-        - python: 2.7
-          env: CONDA_DEPENDENCIES='Cython numpy scipy nose matplotlib numba'
-
         - python: 3.5
           env: CONDA_DEPENDENCIES='Cython numpy scipy nose matplotlib numba' SETUP_CMD='test --coverage'
 
@@ -72,49 +65,20 @@ matrix:
         - python: 3.4
           env: NUMPY_VERSION=1.11
 
-        ## Here allowed failures start
-        # Try older numpy versions
-        - python: 2.7
-          env: NUMPY_VERSION=1.8
-        - python: 2.7
-          env: NUMPY_VERSION=1.7
-        # Try older scipy versions
-        - python: 2.7
-          env: SCIPY_VERSION=0.16.0
-        - python: 2.7
-          env: SCIPY_VERSION=0.14.0
-        - python: 2.6
-          env: SETUP_CMD='test'
-
-        - python: 2.7
+        - python: 3.6
           env: SETUP_CMD='build_sphinx -w'
         # Try Astropy development version
-        - python: 2.7
-          env: ASTROPY_VERSION=development
         - python: 3.5
           env: ASTROPY_VERSION=development
 
     allow_failures:
         # Try older numpy versions
-        - python: 2.7
-          env: NUMPY_VERSION=1.8
-        - python: 2.7
-          env: NUMPY_VERSION=1.7
-        # Try older scipy versions
-        - python: 2.7
-          env: SCIPY_VERSION=0.16.0
-        - python: 2.7
-          env: SCIPY_VERSION=0.14.0
-        - python: 2.6
-          env: SETUP_CMD='test'
-
-        - python: 2.7
-          env: SETUP_CMD='build_sphinx -w'
-        # Try Astropy development version
-        - python: 2.7
-          env: ASTROPY_VERSION=development
         - python: 3.5
           env: ASTROPY_VERSION=development
+        - python: 3.4
+          env: NUMPY_VERSION=1.11
+        - python: 3.6
+          env: SETUP_CMD='build_sphinx -w'
 
 
 before_install:
